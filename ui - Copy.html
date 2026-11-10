@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Figma Auditor</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#03101f;color:#dcecff;font:13px Arial,sans-serif}button,input,select{font:inherit}.app{min-height:100vh;padding:18px 28px;background:radial-gradient(circle at 50% 0,#0b2541,#03101f 58%)}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.brand{display:flex;align-items:center;gap:10px}.brand b{display:block;color:#fff;font-size:20px}.brand small{display:block;color:#8db4de}.logo{width:28px;height:28px;position:relative;display:flex;align-items:center;justify-content:center}.logo img{width:100%;height:100%;display:block;border-radius:8px;object-fit:cover;box-shadow:0 0 16px rgba(64,162,255,.35)}.window{display:flex;max-width:1120px;min-height:510px;margin:auto;overflow:hidden;border:1px solid #1764a2;border-radius:9px;background:#061628}.side{width:174px;padding:18px 12px;border-right:1px solid #163551}.side .brand{margin-bottom:38px}.side .brand b{font-size:13px}.nav{display:flex;flex-direction:column;gap:7px}.nav button,.link{display:flex;align-items:center;gap:10px;width:100%;padding:12px;border:0;border-radius:6px;background:none;color:#abc8e7;text-align:left;cursor:pointer}.nav button.active,.nav button:hover{background:#0755a0;color:#fff}.free{margin-top:120px;display:inline-block;padding:6px 9px;border:1px solid #185694;border-radius:5px;color:#7abaff;font-size:10px}.quota{margin-top:8px;color:#8cadd2;font-size:10px;line-height:1.5}.main{flex:1;min-width:0}.head{height:52px;padding:0 18px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #163551;color:#fff;font-weight:bold}.content{max-height:455px;overflow:auto;padding:25px}.center{text-align:center;max-width:500px;margin:35px auto}.illus{width:80px;height:60px;margin:auto;display:grid;place-items:center;border:2px solid #367ac4;border-radius:8px;color:#248eff;font-size:35px}.center h1{color:#fff}.center p,p{line-height:1.6;color:#8cadd2}.primary,.outline,.danger{border:0;border-radius:6px;padding:10px 15px;cursor:pointer}.primary{background:#1685ee;color:#fff}.outline{border:1px solid #1d527f;background:#09223c;color:#c5ddf7}.outline:disabled{opacity:.6;cursor:default}.danger{background:#702c47;color:#ffb8c8}.row{display:flex;align-items:center;gap:12px;padding:13px 15px;border-bottom:1px solid #153b5e;color:#c6ddf5}.grow{flex:1}.table,.card,.one{border:1px solid #1c4e7b;border-radius:8px;background:#09223b;padding:15px}.stats,.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:15px 0}.plans{grid-template-columns:repeat(3,1fr)}.stat{padding:12px;border:1px solid #1c4e7b;border-radius:7px;background:#09223b}.stat span{display:block;color:#8cadd2;font-size:10px}.stat b{display:block;margin-top:5px;color:#fff;font-size:18px}.stat.danger{border-color:#a83253}.card.featured{border-color:#269dff;box-shadow:0 0 18px #1685ee33}.price{margin:15px 0;color:#fff;font-size:26px;font-weight:bold}.price small{margin-left:4px;color:#8cadd2;font-size:12px;font-weight:normal}.features{padding:0;list-style:none;color:#abc7e5;font-size:11px;line-height:2}.features li:before{content:'\2713';margin-right:7px;color:#28a6ff}.popular{float:right;padding:4px 6px;border-radius:4px;background:#32a8ff;color:#03101f;font-size:9px;font-weight:bold}.one{display:flex;align-items:center;gap:18px;margin-top:12px}.one small{display:block;color:#8cadd2;margin-top:5px}.search{width:100%;margin:10px 0;padding:11px;border:1px solid #1b4d79;border-radius:6px;background:#061a2e;color:#fff}.tabs{display:flex;gap:4px;margin:12px 0}.tabs button{border:0;border-radius:7px;padding:8px 12px;background:#081d34;color:#8fb2d8;cursor:pointer}.tabs button.active{background:#075cae;color:#fff;box-shadow:0 0 12px #1685ee88,inset 0 0 8px #32a8ff33}.footer{display:flex;justify-content:space-around;max-width:1120px;margin:22px auto 0;padding-top:18px;border-top:1px solid #173d60;color:#48a8ff;font-size:11px}
+.alert{border:1px solid #a83253;background:#2a1220;color:#ffb8c8;border-radius:8px;padding:12px 14px;margin:14px 0;line-height:1.5}.ok{color:#5fd39a;font-size:12px}.field{width:100%;padding:10px;border:1px solid #1b4d79;border-radius:6px;background:#061a2e;color:#fff}.field[readonly]{opacity:.7}.lbl{display:block;color:#82a4ca;font-size:11px;margin:12px 0 4px}.spinner{width:34px;height:34px;margin:18px auto;border:3px solid #163551;border-top-color:#1685ee;border-radius:50%;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:760px){.app{padding:12px}.side{width:125px}.content{padding:15px}.plans,.stats{grid-template-columns:1fr}.top>span{display:none}.footer{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}}
+.footer button{border:0;background:none;color:inherit;font:inherit;cursor:pointer}.footer button:hover{text-decoration:underline}textarea.field{min-height:130px;resize:vertical}
+
+/* ---- polish: hover, press, focus, page transition ---- */
+button{transition:background .18s ease,border-color .18s ease,color .18s ease,transform .12s ease,box-shadow .2s ease,opacity .18s ease}
+.primary:hover:not(:disabled){background:#2b97ff;box-shadow:0 4px 16px #1685ee66}
+.outline:hover:not(:disabled){background:#0d3358;border-color:#3a8fd6;color:#fff}
+.danger:hover:not(:disabled){background:#8f3459;color:#ffd6e0}
+.danger:disabled{opacity:.45;cursor:default}
+.primary:active:not(:disabled),.outline:active:not(:disabled),.danger:active:not(:disabled),.nav button:active,.tabs button:active{transform:scale(.97)}
+.nav button{transition:background .18s ease,color .18s ease,transform .12s ease,padding-left .18s ease}
+.nav button:hover:not(.active){padding-left:16px;background:#0a3560}
+.tabs button:hover:not(.active){background:#0b2d50;color:#fff}
+#rows .row{transition:background .15s ease}
+#rows .row:hover,#tabbody .row:hover{background:#0c2c4a}
+#tabbody .ghead:hover{background:#0c2c4a}
+.card{transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.card:hover{transform:translateY(-4px);border-color:#269dff;box-shadow:0 10px 28px #1685ee33}
+.stat{transition:transform .2s ease,border-color .2s ease}
+.stat:hover{transform:translateY(-2px);border-color:#3a8fd6}
+.stat.danger:hover{border-color:#d4446b}
+.one{transition:border-color .2s ease,box-shadow .2s ease}
+.one:hover{border-color:#3a8fd6;box-shadow:0 6px 20px #1685ee22}
+.field,.search{transition:border-color .18s ease,box-shadow .18s ease}
+.field:focus,.search:focus{outline:none;border-color:#32a8ff;box-shadow:0 0 0 3px #32a8ff33}
+button:focus-visible,input[type=checkbox]:focus-visible{outline:2px solid #32a8ff;outline-offset:2px}
+input[type=checkbox]{accent-color:#1685ee;cursor:pointer}
+.chk{width:16px;height:16px}
+.content.enter>*{animation:fadeUp .28s ease both}
+.content.enter>*:nth-child(2){animation-delay:.04s}
+.content.enter>*:nth-child(3){animation-delay:.08s}
+.content.enter>*:nth-child(4){animation-delay:.12s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+#rows>.row,#tabbody>.row,#tabbody>.grp{animation:fadeUp .22s ease both}
+.grp{margin-bottom:12px;border:1px solid #153b5e;border-radius:6px;overflow:hidden}.grp:last-child{margin-bottom:0}.grp>.row:last-child{border-bottom:0}.ghead{background:#0c2c4a}.tag{display:inline-block;padding:3px 9px;border-radius:10px;background:#0c2c4a;color:#8fb2d8;font-size:11px;white-space:nowrap}.muted{color:#8cadd2;font-size:12px}.bar{height:4px;margin-top:7px;border-radius:2px;background:#0c2c4a}.bar i{display:block;height:100%;border-radius:2px;background:#1685ee}.hint{margin:0 0 4px}
+
+/* ---- billing toggle + scan progress ---- */
+.toggle{display:inline-flex;border:1px solid #1c4e7b;border-radius:8px;overflow:hidden}.toggle button{border:0;padding:8px 16px;background:#081d34;color:#8fb2d8;cursor:pointer}.toggle button.active{background:#075cae;color:#fff}.toggle small{margin-left:5px;color:#9fdcff;font-size:10px}
+.ring{width:120px;height:120px;margin:18px auto;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#1685ee calc(var(--p)*1%),#163551 0)}.ring span{width:96px;height:96px;border-radius:50%;background:#061628;display:grid;place-items:center;color:#fff;font-size:22px;font-weight:bold}
+.steps{max-width:480px;margin:22px auto 0;text-align:left}.step{display:flex;gap:12px;align-items:flex-start;margin:14px 0;color:#8cadd2}.step.active,.step.done{color:#fff}.dot{width:26px;height:26px;flex:none;border-radius:50%;border:2px solid #163551;display:grid;place-items:center;font-size:13px}.step.done .dot{background:#1685ee;border-color:#1685ee;color:#fff}.step.active .dot{border-color:#1685ee;border-top-color:transparent;animation:spin 1s linear infinite}.sbar{height:5px;margin-top:6px;border-radius:3px;background:#163551}.sbar i{display:block;height:100%;border-radius:3px;background:#1685ee;transition:width .2s}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.logo{background-image:url("data:image/jpeg;base64,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");background-position:center;background-size:cover;background-repeat:no-repeat;border-radius:8px}.logo svg{display:none}
+</style>
+</head>
+<body>
+<div class="app"><div class="top"><div class="brand"><div class="logo"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="0" y="0" width="14" height="14" rx="5" fill="#8b4dff"/><rect x="14" y="0" width="14" height="14" rx="5" fill="#287fff"/><rect x="0" y="14" width="14" height="14" rx="5" fill="#10b9e8"/></svg></div><div><b>Figma Auditor</b><small>Component Usage Analyzer</small></div></div><span>Cleaner files. Faster workflows &rarr;</span></div><div class="window"><aside class="side"><div class="brand"><div class="logo"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="0" y="0" width="14" height="14" rx="5" fill="#8b4dff"/><rect x="14" y="0" width="14" height="14" rx="5" fill="#287fff"/><rect x="0" y="14" width="14" height="14" rx="5" fill="#10b9e8"/></svg></div><b>Figma Auditor</b></div><nav class="nav"><button class="active" data-page="scan">&#8962; Scan</button><button data-page="results">&#9635; Results</button><button data-page="map">&#9638; Usage Map</button><button data-page="upgrade">&#9819; Upgrade</button><button data-page="settings">&#9881; Settings</button></nav><div class="free" id="plan-badge">&#9889; Free Plan</div><div class="quota" id="quota"></div></aside><main class="main"><div class="head">&#9889; <span id="title">Figma Auditor</span></div><div class="content" id="content"></div></main></div><footer class="footer"><button type="button" data-page="help">&#9993; Help</button><button type="button" data-page="feedback">&#9733; Feedback</button><span style="color:#48a8ff;cursor:text;user-select:text">&#9993; figmaauditor@gmail.com</span></footer></div>
+<script>
+var $=function(s){return document.querySelector(s)},content=$('#content'),title=$('#title');
+var PLAN_LABELS={free:'Free',pro:'Pro',agency:'Agency'};
+var STEPS=[['read','Reading components'],['usage','Analyzing usage'],['dupes','Detecting duplicates & variants']];
+var state={page:'scan',plan:'free',free_scans_left:null,credits:0,name:'',email:'',scanning:false,prog:null,billing:'yearly',blocked:null,error:'',localNotice:'',result:null,emailSaved:false,tab:'unused',query:'',shown:50,selected:{},confirmBulk:false,confirmRow:null,note:'',helpMessage:'',helpEmail:'',helpError:'',helpSent:false,helpSending:false,feedbackMessage:'',feedbackEmail:'',feedbackError:'',feedbackSent:false,feedbackSending:false};
+state.statusLoading=true;state.accountReady=false;state.accountError='';state.authMode='sign-in';state.authBusy=false;state.authNotice='';state.authEmail='';state.authError='';
+
+function post(pluginMessage){parent.postMessage({pluginMessage:pluginMessage},'*')}
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function fmt(n){return typeof n==='number'?n.toLocaleString('en-US'):'\u2013'}
+function planLabel(){return PLAN_LABELS[state.plan]||state.plan}
+
+function sidebar(){
+  $('#plan-badge').textContent='\u26A1 '+planLabel()+' Plan';
+  var q='';
+  if(state.statusLoading)q='Checking Figma account...';
+  else if(state.accountError)q='Trial status unavailable';
+  else if(state.plan==='free'&&state.free_scans_left!==null)q='Free trial scans left: '+state.free_scans_left+' of 3';
+  if(state.credits>0)q+=(q?'<br>':'')+'Credits: '+state.credits;
+  $('#quota').innerHTML=q;
+  var active=state.page;
+  document.querySelectorAll('.nav button').forEach(function(b){b.classList.toggle('active',b.dataset.page===active)});
+}
+
+function progressView(){
+  var info=state.prog||{},cur=-1,sum=0;
+  STEPS.forEach(function(s,i){if(info[s[0]])cur=i});
+  var rows=STEPS.map(function(s,i){
+    var d=info[s[0]],frac=0,cls='';
+    if(i<cur){frac=1;cls='done'}
+    else if(i===cur){frac=d&&d.total?Math.min(1,d.done/d.total):0;cls=frac>=1?'done':'active'}
+    else if(cur===-1&&i===0){cls='active'}
+    sum+=frac;
+    var cnt=d&&d.total?' ('+fmt(d.done)+' / '+fmt(d.total)+')':'';
+    return '<div class="step '+cls+'"><div class="dot">'+(cls==='done'?'\u2713':'')+'</div><div class="grow"><div>'+s[1]+cnt+'</div><div class="sbar"><i style="width:'+Math.round(frac*100)+'%"></i></div></div></div>';
+  }).join('');
+  var pct=Math.round(sum/STEPS.length*100);
+  var ring=cur>=0?'<div class="ring" style="--p:'+pct+'"><span>'+pct+'%</span></div>':'<div class="spinner" style="width:60px;height:60px"></div>';
+  return '<div class="center" style="margin-top:10px"><h2>Scanning your file...</h2><p>This may take a few seconds. Please don\u2019t close the plugin.</p>'+ring+'<div class="steps">'+rows+'</div></div>';
+}
+
+function authScreen(){
+  var signingIn=state.authMode==='sign-in';
+  return '<div class="center" style="max-width:390px"><div class="illus">\u2315</div><h1>Sign in to scan</h1><p>Sign in or create an account to see your free trial balance and scan this file.</p>'+
+    '<div class="table" style="text-align:left"><label class="lbl" for="auth-email">Email</label><input class="field" id="auth-email" type="email" autocomplete="email" required value="'+esc(state.authEmail)+'" placeholder="you@example.com"><label class="lbl" for="auth-password">Password</label><input class="field" id="auth-password" type="password" autocomplete="'+(signingIn?'current-password':'new-password')+'" minlength="6" required placeholder="At least 6 characters">'+
+    (state.accountError?'<div class="alert">'+esc(state.accountError)+'</div>':'')+(state.authError?'<div class="alert">'+esc(state.authError)+'</div>':'')+(state.authNotice?'<div class="ok" role="status">'+esc(state.authNotice)+'</div>':'')+
+    '<button class="primary" style="width:100%;margin-top:12px" data-action="auth-submit"'+(state.authBusy?' disabled':'')+'>'+(state.authBusy?'Please wait...':signingIn?'Sign in':'Create account')+'</button>'+
+    '<button class="outline" style="width:100%;margin-top:9px" data-action="auth-toggle"'+(state.authBusy?' disabled':'')+'>'+(signingIn?'New here? Create an account':'Already have an account? Sign in')+'</button></div></div>';
+}
+
+function scan(){
+  title.textContent='Scan';
+  if(state.scanning){content.innerHTML=progressView();return}
+  title.textContent='Figma Auditor';
+  var h='<div class="center"><div class="illus">\u2315</div><h1>Figma Auditor</h1><p>Analyze unused components,<br>duplicates, and variants.</p>';
+  if(state.statusLoading){
+    h+='<div class="spinner"></div><p>Checking your Figma account and free trial...</p>';
+  }else if(!state.accountReady){
+    content.innerHTML=authScreen();
+    return;
+  }else if(state.blocked){
+    var b=state.blocked;
+    var msg=b.reason==='free_limit_reached'?'Your 3 free trial scans are used. Upgrade your plan or buy a one-time scan.':b.reason==='component_limit'?'This file has too many components for your plan (max '+esc(b.max)+').':'This scan is not available for your account.';
+    h+='<div class="alert">'+msg+'</div><button class="primary" data-action="goto-upgrade">\u265B See plans</button>';
+  }else if(state.error){
+    h+='<div class="alert">'+esc(state.error)+'</div><button class="primary" data-action="scan">\u25B6 Try again</button>';
+  }else if(state.plan==='free'&&state.free_scans_left===0&&state.credits===0){
+    h+='<div class="alert">Your 3 free trial scans are used. Upgrade your plan or buy a one-time scan.</div><button class="primary" data-action="goto-upgrade">\u265B See plans</button>';
+  }else{
+    h+='<p>'+(state.plan==='free'?'Signed in with your Figma account \u00B7 '+state.free_scans_left+' of 3 free trial scans remaining \u00B7 Up to 100 components per trial scan':'Signed in with your Figma account')+'</p>';
+    h+='<button class="primary" data-action="scan">\u25B6 Scan File</button>';
+  }
+  h+='<p>Quick \u2022 Accurate \u2022 Lightweight</p></div>';
+  content.innerHTML=h;
+}
+
+function filteredUnused(){
+  var r=state.result;if(!r||!r.unused)return [];
+  var q=state.query.trim().toLowerCase();
+  return r.unused.filter(function(c){return !q||c.name.toLowerCase().indexOf(q)!==-1});
+}
+function selectedIds(){return Object.keys(state.selected)}
+
+function drawRows(){
+  var rows=$('#rows');if(!rows||!state.result)return;
+  var list=filteredUnused(),vis=list.slice(0,state.shown);
+  rows.innerHTML=vis.length?vis.map(function(c){
+    var del=state.confirmRow===c.id;
+    return '<div class="row"><input type="checkbox" class="chk" data-id="'+esc(c.id)+'"'+(state.selected[c.id]?' checked':'')+'><span class="grow">'+esc(c.name)+'</span><button class="outline" data-action="view" data-id="'+esc(c.id)+'">View</button><button class="danger" data-action="del-row" data-id="'+esc(c.id)+'">'+(del?'Confirm delete':'Delete')+'</button></div>';
+  }).join(''):'<div class="row"><span class="grow">'+(state.result.unused.length?'No components match your search.':'No unused components found.')+'</span></div>';
+  var n=selectedIds().length;
+  $('#count').textContent=n+' selected';
+  var bb=$('#bulk');bb.disabled=n===0;
+  bb.textContent=(state.confirmBulk&&n)?'Confirm delete '+n+'?':'Bulk Delete';
+  $('#cancel-bulk').style.display=(state.confirmBulk&&n)?'inline-block':'none';
+  $('#showing').textContent='Showing '+vis.length+' of '+list.length+' unused components';
+  $('#more').style.display=list.length>vis.length?'inline-block':'none';
+  $('#all').checked=list.length>0&&list.every(function(c){return state.selected[c.id]});
+}
+
+function matchQ(v){var q=state.query.trim().toLowerCase();return !q||String(v).toLowerCase().indexOf(q)!==-1}
+function delBtn(id,uses){
+  if(uses>0)return '<span class="tag">In use</span>';
+  return '<button class="danger" data-action="del-row" data-id="'+esc(id)+'">'+(state.confirmRow===id?'Confirm delete':'Delete')+'</button>';
+}
+function viewBtn(id){return '<button class="outline" data-action="view" data-id="'+esc(id)+'">View</button>'}
+function redraw(){
+  if(state.page==='map'){drawTab();return}
+  if(state.page!=='results')return;
+  if(state.tab==='unused'){if(state.result&&state.result.unused)drawRows()}else drawTab()
+}
+function drawTab(){
+  var body=$('#tabbody');if(!body||!state.result)return;
+  var r=state.result,t=state.tab,list,vis,html='',empty,noun;
+  if(t==='duplicates'){
+    noun='duplicate groups';empty='No duplicate components found.';
+    list=(r.duplicates||[]).filter(function(g){return matchQ(g.name)});
+    vis=list.slice(0,state.shown);
+    html=vis.map(function(g){
+      return '<div class="grp"><div class="row ghead"><b class="grow">'+esc(g.name)+'</b><span class="tag">'+g.total+' copies</span></div>'+
+      g.items.map(function(it){return '<div class="row"><span class="grow">'+esc(it.page)+'</span><span class="muted">Used '+it.uses+'\u00D7</span>'+viewBtn(it.id)+delBtn(it.id,it.uses)+'</div>'}).join('')+
+      (g.total>g.items.length?'<div class="row"><span class="muted">+ '+(g.total-g.items.length)+' more copies not shown</span></div>':'')+'</div>';
+    }).join('');
+  }else if(t==='variants'){
+    noun='variant sets';empty='No variants found in this file.';
+    list=(r.variants||[]).filter(function(g){return matchQ(g.name)});
+    vis=list.slice(0,state.shown);
+    html=vis.map(function(g){
+      return '<div class="grp"><div class="row ghead"><b class="grow">'+esc(g.name)+'</b><span class="tag">'+g.total+' variants</span><span class="tag">'+g.unused+' unused</span>'+viewBtn(g.id)+'</div>'+
+      g.items.map(function(it){return '<div class="row"><span class="grow">'+esc(it.name)+'</span><span class="muted">Used '+it.uses+'\u00D7</span>'+viewBtn(it.id)+delBtn(it.id,it.uses)+'</div>'}).join('')+
+      (g.total>g.items.length?'<div class="row"><span class="muted">+ '+(g.total-g.items.length)+' more variants not shown</span></div>':'')+'</div>';
+    }).join('');
+  }else{
+    noun='components';empty='No components found.';
+    var all=r.map||[],max=all.length&&all[0].uses?all[0].uses:1;
+    list=all.filter(function(c){return matchQ(c.name)||matchQ(c.page)});
+    vis=list.slice(0,state.shown);
+    html=vis.map(function(c){
+      var where=c.uses?'Used in: '+c.pages.map(function(p){return esc(p.name)+' ('+p.count+')'}).join(', '):'Not used anywhere';
+      return '<div class="row"><div class="grow"><div>'+esc(c.name)+'</div><div class="muted">Defined on '+esc(c.page)+' \u00B7 '+where+'</div><div class="bar"><i style="width:'+Math.round(c.uses/max*100)+'%"></i></div></div><b>'+c.uses+'\u00D7</b>'+viewBtn(c.id)+'</div>';
+    }).join('');
+  }
+  body.innerHTML=html||'<div class="row"><span class="grow">'+empty+'</span></div>';
+  $('#showing').textContent='Showing '+vis.length+' of '+list.length+' '+noun;
+  $('#more').style.display=list.length>vis.length?'inline-block':'none';
+}
+
+function results(){
+  title.textContent='Results';
+  var r=state.result;
+  if(!r){
+    content.innerHTML='<div class="center"><div class="illus">\u25A3</div><h2>No results yet</h2><p>Run a scan to see unused components and duplicates.</p><button class="primary" data-action="goto-scan">Go to Scan</button></div>';
+    return;
+  }
+  var tabs=[['unused','Unused'],['duplicates','Duplicates'],['variants','Variants']];
+  var h='<div class="row" style="padding-left:0;padding-right:0"><div class="grow"><h2>Scan Results</h2><p>'+fmt(r.unused_count)+' unused components found</p></div><button class="outline" data-action="export">\u21E9 Export CSV</button></div>'+
+  '<div class="stats"><div class="stat"><span>Total Components</span><b>'+fmt(r.component_count)+'</b></div><div class="stat danger"><span>Unused Components</span><b>'+fmt(r.unused_count)+'</b></div><div class="stat"><span>Duplicate Groups</span><b>'+fmt(r.duplicate_groups)+'</b></div><div class="stat"><span>Total Variants</span><b>'+fmt(r.variant_count)+'</b></div></div>'+
+  '<div class="tabs">'+tabs.map(function(t){return '<button class="'+(state.tab===t[0]?'active':'')+'" data-action="tab" data-tab="'+t[0]+'">'+t[1]+'</button>'}).join('')+'</div>';
+  if(state.note)h+='<div class="alert">'+esc(state.note)+'</div>';
+  if(state.tab!=='unused'){
+    var hints={duplicates:'Components that share the same name. Delete the copies you don\u2019t use.',variants:'Variant sets and how often each variant is used. Unused variants can be deleted.'};
+    h+='<p class="hint">'+hints[state.tab]+'</p><input class="search" id="search" placeholder="Search..." value="'+esc(state.query)+'"><div class="table" style="padding:0"><div id="tabbody"></div></div><p id="showing"></p><button class="outline" id="more" data-action="load-more">Load more\u2304</button>';
+  }else if(!r.unused){
+    h+='<div class="table"><div class="row"><span class="grow">Run a new scan to see the component list.</span></div></div>';
+  }else{
+    h+='<input class="search" id="search" placeholder="Search components..." value="'+esc(state.query)+'">'+
+    '<div class="table"><div class="row"><label><input type="checkbox" id="all"> Select All</label><span class="grow" id="count">0 selected</span><button class="outline" id="cancel-bulk" data-action="cancel-bulk" style="display:none">Cancel</button><button class="danger" id="bulk" data-action="bulk-delete" disabled>Bulk Delete</button></div><div id="rows"></div></div>'+
+    '<p id="showing"></p><button class="outline" id="more" data-action="load-more">Load more\u2304</button>';
+  }
+  content.innerHTML=h;
+  if(state.tab==='unused'&&r.unused)drawRows();
+  else if(state.tab!=='unused')drawTab();
+}
+
+function usageMap(){
+  title.textContent='Usage Map';
+  if(!state.result){
+    content.innerHTML='<div class="center"><div class="illus">\u25A3</div><h2>No results yet</h2><p>Run a scan to see where components are used.</p><button class="primary" data-action="goto-scan">Go to Scan</button></div>';
+    return;
+  }
+  content.innerHTML=(state.note?'<div class="alert">'+esc(state.note)+'</div>':'')+'<div class="row" style="padding-left:0;padding-right:0"><div class="grow"><h2>Usage Map</h2><p>How many times each component is used, and on which pages.</p></div><button class="outline" data-action="export">\u21E9 Export CSV</button></div><input class="search" id="search" placeholder="Search components or pages..." value="'+esc(state.query)+'"><div class="table" style="padding:0"><div id="tabbody"></div></div><p id="showing"></p><button class="outline" id="more" data-action="load-more">Load more\u2304</button>';
+  drawTab();
+}
+
+function download(){
+  var r=state.result;if(!r)return;
+  var csv='Metric,Value\nTotal components,'+r.component_count+'\nUnused components,'+r.unused_count+'\nDuplicate groups,'+r.duplicate_groups+'\n';
+  if(r.unused&&r.unused.length){
+    csv+='\nUnused component,ID\n'+r.unused.map(function(c){return '"'+c.name.replace(/"/g,'""')+'",'+c.id}).join('\n')+'\n';
+  }
+  function q(v){return '"'+String(v).replace(/"/g,'""')+'"'}
+  if(r.duplicates&&r.duplicates.length){
+    csv+='\nDuplicate name,Page,Used,ID\n';
+    r.duplicates.forEach(function(g){g.items.forEach(function(it){csv+=q(g.name)+','+q(it.page)+','+it.uses+','+it.id+'\n'})});
+  }
+  if(r.map&&r.map.length){
+    csv+='\nUsage map: component,Defined on page,Times used,ID\n';
+    r.map.forEach(function(c){csv+=q(c.name)+','+q(c.page)+','+c.uses+','+c.id+'\n'});
+  }
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download='figma-auditor-results.csv';a.click();
+}
+
+function upgrade(){
+  title.textContent='Upgrade';
+  var p=state.plan,y=state.billing==='yearly';
+  var plans=[['free','Free','$0',' trial scans',['3 free trial scans','Max 100 components per scan','Basic CSV export','Basic email support']],
+    ['pro','Pro',y?'$299':'$29',y?' / year':' / month',['Unlimited scans','Max 1,000 components per scan','CSV + JSON export','Standard support']],
+    ['agency','Agency',y?'$699':'$69',y?' / year':' / month',['Unlimited scans','Max 2,500 components per scan','CSV + JSON export','Multi-workspace access','API access','Priority support']]];
+  var head='<div class="row" style="padding:0;border:0"><div class="grow"><h2>Upgrade to Pro</h2><p>Choose the plan that fits your workflow</p></div><div class="toggle"><button class="'+(y?'':'active')+'" data-action="billing" data-billing="monthly">Monthly</button><button class="'+(y?'active':'')+'" data-action="billing" data-billing="yearly">Yearly<small>Save</small></button></div></div>';
+  content.innerHTML=head+'<div class="plans">'+plans.map(function(pl,i){
+    var btn;
+    if(pl[0]===p)btn='<button class="outline" style="width:100%" disabled>Current Plan</button>';
+    else if(pl[0]==='free')btn='<button class="outline" style="width:100%" disabled>Free</button>';
+    else btn='<button class="primary" style="width:100%" data-action="checkout" data-product="'+pl[0]+'">Upgrade to '+pl[1]+'</button>';
+    var badge=i===1?'<span class="popular">'+(y?'Save 14%':'MOST POPULAR')+'</span>':'';
+    return '<div class="card '+(i===1?'featured':'')+'">'+badge+'<b>'+pl[1]+'</b><div class="price">'+pl[2]+'<small>'+pl[3]+'</small></div>'+btn+'<ul class="features">'+pl[4].map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul></div>';
+  }).join('')+'</div><div class="one"><div class="grow"><b>One-Time Usage</b><small>No recurring subscription</small></div><strong>$9 / scan</strong><span>1 scan · Max 500 components · CSV export</span><button class="outline" data-action="checkout" data-product="onetime">Buy Once</button></div>'+(state.localNotice?'<div class="alert">'+esc(state.localNotice)+'</div>':'');
+}
+
+function supportPage(kind){
+  var isHelp=kind==='help',messageKey=isHelp?'helpMessage':'feedbackMessage',emailKey=isHelp?'helpEmail':'feedbackEmail';
+  var errorKey=isHelp?'helpError':'feedbackError',sentKey=isHelp?'helpSent':'feedbackSent',sendingKey=isHelp?'helpSending':'feedbackSending';
+  title.textContent=isHelp?'Help':'Feedback';
+  var emailValue=state[emailKey]||state.email;
+  var success='Message sent. Support can reply to the email address above.';
+  var info='Send your message directly to Figma Auditor support. No mail app is opened.';
+  content.innerHTML='<h2>'+title.textContent+'</h2><p>'+info+'</p><div class="table"><label class="lbl" style="margin-top:0" for="support-email">Your email for reply (required)</label><input class="field" id="support-email" type="email" maxlength="320" required placeholder="you@example.com" value="'+esc(emailValue)+'"><label class="lbl" for="support-message">Message</label><textarea class="field" id="support-message" maxlength="5000" required placeholder="Write your message...">'+esc(state[messageKey])+'</textarea><div class="row" style="padding-left:0;border:0"><button class="primary" data-action="'+(isHelp?'submit-help':'submit-feedback')+'"'+(state[sendingKey]?' disabled':'')+'>'+(state[sendingKey]?'Sending...':isHelp?'Send help request':'Send feedback')+'</button><span class="ok">'+(state[sentKey]?esc(success):'')+'</span></div>'+(state[errorKey]?'<div class="alert">'+esc(state[errorKey])+'</div>':'')+'</div>';
+}
+
+function settings(){
+  title.textContent='Settings';
+  content.innerHTML='<h2>Settings</h2><p>Your account identifies your trial. Scans are limited by your current plan.</p><div class="table"><label class="lbl" style="margin-top:0">Email for help or feedback (optional)</label><input class="field" id="email-input" type="email" placeholder="you@example.com" value="'+esc(state.email)+'"><div class="row" style="padding-left:0;border:0"><button class="primary" data-action="save-email">Save email</button><span class="ok">'+(state.emailSaved?'Saved locally \u2713':'')+'</span></div><div class="row" style="padding-left:0;border-top:1px solid #153b5e;border-bottom:0"><span class="grow">Free trial</span><b>'+(state.free_scans_left===null?'Checking...':state.free_scans_left+' of 3 scans left')+'</b></div><div class="row" style="padding-left:0;border-top:1px solid #153b5e;border-bottom:0"><span class="grow">Trial component limit</span><b>100 per scan</b></div><div class="row" style="padding-left:0;border-top:1px solid #153b5e;border-bottom:0"><span class="grow">Account</span><button class="outline" data-action="sign-out">Sign out</button></div></div>'+(state.localNotice?'<div class="alert">'+esc(state.localNotice)+'</div>':'');
+}
+
+var pages={scan:scan,results:results,map:usageMap,upgrade:upgrade,settings:settings,help:function(){supportPage('help')},feedback:function(){supportPage('feedback')}};
+function render(){sidebar();(pages[state.page]||scan)()}
+function anim(){content.classList.remove('enter');void content.offsetWidth;content.classList.add('enter')}
+function go(p){
+  if(p==='map'){
+    state.page='map';state.tab='map';state.query='';state.shown=50;state.confirmRow=null;state.confirmBulk=false;
+  }else{
+    if(p==='results'&&state.tab==='map'){state.tab='unused';state.query='';state.shown=50}
+    state.page=p;
+  }
+  render();anim();
+}
+
+function startScan(){
+  if(state.statusLoading||!state.accountReady){post({type:'get-status'});return}
+  if(state.plan==='free'&&state.free_scans_left===0&&state.credits===0){state.blocked={reason:'free_limit_reached'};render();return}
+  state.blocked=null;state.error='';state.scanning=true;state.prog=null;state.page='scan';render();anim();
+  post({type:'start-scan',email:state.email||undefined});
+}
+
+document.querySelectorAll('[data-page]').forEach(function(b){b.onclick=function(){go(b.dataset.page)}});
+
+content.addEventListener('click',function(e){
+  var el=e.target.closest('[data-action]');
+  if(!el||el.disabled)return;
+  var a=el.dataset.action;
+  if(a!=='del-row'&&state.confirmRow){state.confirmRow=null;redraw()}
+  if(a!=='bulk-delete'&&state.confirmBulk){state.confirmBulk=false;if(state.tab==='unused')redraw()}
+  if(a==='scan')startScan();
+  else if(a==='auth-toggle'){
+    state.authMode=state.authMode==='sign-in'?'sign-up':'sign-in';
+    state.authNotice='';state.authError='';state.accountError='';render();
+  }
+  else if(a==='auth-submit'){
+    var authEmail=$('#auth-email'),authPassword=$('#auth-password');
+    if(!authEmail.reportValidity()||!authPassword.reportValidity())return;
+    state.authEmail=authEmail.value.trim();state.authNotice='';state.authError='';state.accountError='';state.authBusy=true;render();
+    post({type:'auth-submit',mode:state.authMode,email:state.authEmail,password:authPassword.value});
+  }
+  else if(a==='sign-out')post({type:'auth-sign-out'});
+  else if(a==='goto-upgrade')go('upgrade');
+  else if(a==='goto-scan')go('scan');
+  else if(a==='export')download();
+  else if(a==='billing'){state.billing=el.dataset.billing;render()}
+  else if(a==='tab'){state.tab=el.dataset.tab;state.query='';state.shown=50;state.confirmRow=null;render()}
+  else if(a==='load-more'){state.shown+=50;redraw()}
+  else if(a==='view')post({type:'select-component',id:el.dataset.id});
+  else if(a==='del-row'){
+    var id=el.dataset.id;
+    if(state.confirmRow===id){state.confirmRow=null;state.note='';post({type:'delete-components',ids:[id]})}
+    else{state.confirmRow=id;redraw()}
+  }
+  else if(a==='bulk-delete'){
+    var ids=selectedIds();if(!ids.length)return;
+    if(state.confirmBulk){state.confirmBulk=false;state.note='';post({type:'delete-components',ids:ids})}
+    else{state.confirmBulk=true;drawRows()}
+  }
+  else if(a==='cancel-bulk'){state.confirmBulk=false;drawRows()}
+  else if(a==='checkout')post({type:'open-checkout',product:el.dataset.product,billing:state.billing});
+  else if(a==='submit-help'||a==='submit-feedback'){
+    var kind=a==='submit-help'?'help':'feedback',message=$('#support-message'),email=$('#support-email');
+    if(!message.reportValidity()||!email.reportValidity())return;
+    state[kind+'Message']=message.value.trim();
+    state[kind+'Email']=email.value.trim();
+    state[kind+'Error']='';state[kind+'Sent']=false;state[kind+'Sending']=true;
+    render();
+    post({type:kind+'-submit',message:state[kind+'Message'],email:state[kind+'Email']||undefined});
+  }
+  else if(a==='save-email'){
+    var v=$('#email-input').value.trim();
+    state.email=v;state.emailSaved=!!v;
+    post({type:'save-email',email:v});
+    render();
+  }
+});
+
+content.addEventListener('change',function(e){
+  var t=e.target;
+  if(t.classList&&t.classList.contains('chk')){
+    if(t.checked)state.selected[t.dataset.id]=true;else delete state.selected[t.dataset.id];
+    state.confirmBulk=false;drawRows();
+  }else if(t.id==='all'){
+    filteredUnused().forEach(function(c){if(t.checked)state.selected[c.id]=true;else delete state.selected[c.id]});
+    state.confirmBulk=false;drawRows();
+  }
+});
+content.addEventListener('input',function(e){
+  if(e.target.id==='search'){state.query=e.target.value;state.shown=50;redraw()}
+  else if(e.target.id==='support-message'){
+    var kind=state.page==='help'?'help':'feedback';
+    state[kind+'Message']=e.target.value;
+    state[kind+'Error']='';state[kind+'Sent']=false;
+  }else if(e.target.id==='support-email'){
+    var kind2=state.page==='help'?'help':'feedback';
+    state[kind2+'Email']=e.target.value;
+  }
+});
+
+window.onmessage=function(event){
+  var msg=event.data&&event.data.pluginMessage;
+  if(!msg||!msg.type)return;
+  if(msg.type==='help-sent'||msg.type==='feedback-sent'){
+    var kind=msg.type==='help-sent'?'help':'feedback';
+    state[kind+'Sending']=false;state[kind+'Sent']=true;state[kind+'Message']='';state[kind+'Error']='';
+    if(state.page===kind)render();
+  }else if(msg.type==='support-error'){
+    var kind2=msg.form==='help'?'help':'feedback';
+    state[kind2+'Sending']=false;state[kind2+'Sent']=false;
+    var reasons={
+      email_not_configured:'Help email is not configured yet. Please try again later.',
+      email_send_failed:'The help email could not be sent. Please try again.',
+      feedback_saved_email_not_configured:'Feedback email is not configured yet. Please try again later.',
+      feedback_saved_email_failed:'Your feedback email could not be sent. Please try again.',
+      rate_limited:'Too many requests. Please wait a moment and try again.'
+    };
+    state[kind2+'Error']=reasons[msg.reason]||'Could not submit your message. Please check your connection and try again.';
+    if(state.page===kind2)render();
+  }else if(msg.type==='auth-required'){
+    state.statusLoading=false;state.accountReady=false;state.accountError='';state.authError='';state.authNotice='';state.authBusy=false;render();
+  }else if(msg.type==='auth-verification-required'){
+    state.statusLoading=false;state.accountReady=false;state.authBusy=false;state.authNotice=msg.message||'Check your email to verify your account, then sign in.';render();
+  }else if(msg.type==='auth-success'){
+    state.authBusy=false;state.statusLoading=true;state.accountError='';state.authError='';state.authNotice='Signed in. Checking your trial...';render();
+  }else if(msg.type==='auth-error'){
+    state.authBusy=false;state.authError=msg.message||'Sign-in failed. Check your details and try again.';render();
+  }else if(msg.type==='status'){
+    state.statusLoading=false;state.accountReady=true;state.accountError='';
+    state.plan=msg.plan||'free';
+    state.free_scans_left=typeof msg.free_scans_left==='number'?msg.free_scans_left:null;
+    state.credits=msg.credits||0;
+    state.name=msg.name||state.name;
+    if(typeof msg.email==='string')state.email=msg.email;
+    var ei=$('#email-input');
+    if(ei&&document.activeElement===ei){sidebar();return}
+    render();
+  }else if(msg.type==='status-error'){
+    state.statusLoading=false;state.accountReady=false;state.accountError=msg.message||'Could not check your free trial.';
+    state.authBusy=false;state.authNotice='';
+    render();
+  }else if(msg.type==='scan-progress'){
+    if(!state.scanning)return;
+    state.prog=state.prog||{};
+    state.prog[msg.step]={done:msg.done,total:msg.total};
+    if(state.page==='scan')scan();
+  }else if(msg.type==='blocked'){
+    state.scanning=false;state.prog=null;state.error='';state.blocked={reason:msg.reason,max:msg.max};state.page='scan';render();anim();
+  }else if(msg.type==='scan-done'){
+    state.scanning=false;state.prog=null;state.blocked=null;state.error='';
+    state.result={component_count:msg.component_count,unused_count:msg.unused_count,duplicate_groups:msg.duplicate_groups,unused:Array.isArray(msg.unused)?msg.unused:null,duplicates:msg.duplicates||[],variants:msg.variants||[],map:msg.map||[],variant_count:msg.variant_count||0};
+    state.selected={};state.query='';state.shown=50;state.tab='unused';state.confirmBulk=false;state.confirmRow=null;state.note='';
+    state.page='results';render();anim();
+  }else if(msg.type==='deleted'){
+    var gone={};(msg.ids||[]).forEach(function(i){gone[i]=true;delete state.selected[i]});
+    if(state.result&&state.result.unused){
+      state.result.unused=state.result.unused.filter(function(c){return !gone[c.id]});
+      state.result.unused_count=state.result.unused.length;
+      state.result.component_count=Math.max(0,state.result.component_count-(msg.ids||[]).length);
+    }
+    if(state.result){
+      var r2=state.result,dBefore=(r2.duplicates||[]).length,vGone=0;
+      r2.duplicates=(r2.duplicates||[]).map(function(g){var it=g.items.filter(function(x){return !gone[x.id]});return {name:g.name,total:g.total-(g.items.length-it.length),items:it}}).filter(function(g){return g.total>1});
+      r2.duplicate_groups=Math.max(0,(r2.duplicate_groups||0)-(dBefore-r2.duplicates.length));
+      r2.variants=(r2.variants||[]).map(function(g){
+        var it=g.items.filter(function(x){return !gone[x.id]}),rm=g.items.length-it.length,rmUnused=g.items.filter(function(x){return gone[x.id]&&x.uses===0}).length;
+        vGone+=rm;return {id:g.id,name:g.name,page:g.page,total:g.total-rm,unused:g.unused-rmUnused,items:it};
+      }).filter(function(g){return g.total>0});
+      r2.variant_count=Math.max(0,(r2.variant_count||0)-vGone);
+      r2.map=(r2.map||[]).filter(function(c){return !gone[c.id]});
+    }
+    state.confirmBulk=false;state.confirmRow=null;
+    state.note=msg.failed>0?msg.failed+' component(s) could not be deleted.':'';
+    render();
+  }else if(msg.type==='error'){
+    state.scanning=false;state.prog=null;state.blocked=null;
+    if(state.page==='scan'){
+      state.error=msg.message||'The scan failed. Please try again.';
+      if(/session expired|email is not verified|sign in/i.test(state.error)){
+        state.statusLoading=false;state.accountReady=false;state.accountError=state.error;state.error='';
+      }
+    }else if(state.page==='help'||state.page==='feedback'){
+      state[state.page+'Sending']=false;
+      state[state.page+'Sent']=false;
+      state[state.page+'Error']=msg.message||'The request failed.';
+    }else if(state.page==='results'||state.page==='map'){
+      state.note=msg.message||'The requested action failed.';
+    }else{
+      state.localNotice=msg.message||'The requested action failed.';
+    }
+    render();
+  }else if(msg.type==='local-feature'){
+    state.localNotice=msg.message||'This feature is unavailable in local-only mode.';
+    render();
+  }
+};
+
+render();
+post({type:'get-status'});
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+export const SUPABASE_URL = "https://iffmcexdegecmbltatao.supabase.co";
+export const SUPABASE_ANON_KEY = "sb_publishable_qzbmt8GhToe-F68iOgOyng_xfqJ94ga";
+export const DODO_CHECKOUT_PRO_MONTHLY_URL =
+  "https://checkout.dodopayments.com/buy/pdt_0Nr935jMv3nfSDeOrl2Xl?quantity=1";
+export const DODO_CHECKOUT_PRO_YEARLY_URL =
+  "https://checkout.dodopayments.com/buy/pdt_0Nr9BmwcfnUNrBaMwLtah?quantity=1";
+export const DODO_CHECKOUT_AGENCY_MONTHLY_URL =
+  "https://checkout.dodopayments.com/buy/pdt_0Nr9B8chyxqNlNzs6DHxz?quantity=1";
+export const DODO_CHECKOUT_AGENCY_YEARLY_URL =
+  "https://checkout.dodopayments.com/buy/pdt_0Nr9Bx8TbjJIPhG2QFOZz?quantity=1";
+export const DODO_CHECKOUT_URL =
+  "https://checkout.dodopayments.com/buy/pdt_0Nr9Ag5PMxsi2iSo2rZBk?quantity=1";
+export const DODO_CHECKOUT_ONETIME_URL =
+  "https://checkout.dodopayments.com/buy/pdt_0Nr9XmjAlz7xuJcHhijEZ?quantity=1";

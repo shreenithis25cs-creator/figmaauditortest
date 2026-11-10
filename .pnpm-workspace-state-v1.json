@@ -1,0 +1,50 @@
+{
+  "lastValidatedTimestamp": 1792674183180,
+  "projects": {
+    "C:\\Users\\Shanmugam\\Downloads\\figma front and backend": {
+      "name": "figma front and backend",
+      "version": "1.0.0"
+    }
+  },
+  "pnpmfiles": [],
+  "filteredInstall": false,
+  "settings": {
+    "autoInstallPeers": true,
+    "catalogs": {},
+    "dedupeDirectDeps": false,
+    "dedupeInjectedDeps": true,
+    "dedupePeerDependents": true,
+    "dedupePeers": false,
+    "dev": true,
+    "excludeLinksFromLockfile": false,
+    "hoistPattern": [
+      "*"
+    ],
+    "hoistWorkspacePackages": true,
+    "injectWorkspacePackages": false,
+    "linkWorkspacePackages": false,
+    "minimumReleaseAge": 1440,
+    "minimumReleaseAgeIgnoreMissingTime": true,
+    "nodeLinker": "isolated",
+    "optional": true,
+    "peersSuffixMaxLength": 1000,
+    "preferWorkspacePackages": false,
+    "production": true,
+    "publicHoistPattern": []
+  },
+  "validation": {
+    "recordedAtNs": 1792674183181361000,
+    "files": {
+      "C:\\Users\\Shanmugam\\Downloads\\figma front and backend\\pnpm-lock.yaml": {
+        "mtimeNs": 1792674183129786100,
+        "ctimeNs": 1792674183166875600,
+        "size": 114,
+        "digest": "17c814b167307942d3609c7b9d916ced"
+      }
+    },
+    "lockfile": "17c814b167307942d3609c7b9d916ced",
+    "manifests": {
+      ".": "6131a476e19d0f8535462237e0b40893"
+    }
+  }
+}

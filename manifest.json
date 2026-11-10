@@ -1,0 +1,13 @@
+{
+  "name": "Figma Auditor",
+  "id": "figma-auditor",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma"],
+  "permissions": ["currentuser"],
+  "networkAccess": {
+    "allowedDomains": ["https://iffmcexdegecmbltatao.supabase.co"],
+    "reasoning": "Connect to the configured Supabase project for support, account status, and free-trial scan limits."
+  }
+}
